@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import ListGroup from 'react-bootstrap/ListGroup';
+
+
 
 export default function App(){
     /*
@@ -183,14 +186,18 @@ export default function App(){
         <input type="text" value={bookmark.url} name="url" onChange={handleChange} placeholder={'URL'}></input>
         <input type="submit" value="Create Bookmark"/>
     </Form>
-    <ul>
+    <ListGroup as="ol" numbered>
+
+
+
         { bookmarks.length ? bookmarks.map(item => (
-            <li key={item._id}>
+            <ListGroup.Item key={item._id} as="ol" numbered>
                 <h4>{item.title}</h4>
                 <a href={item.url} target="_blank"> {item.url}</a>
-            </li>
+            </ListGroup.Item >
         )): <>No BookMarks Added</>}
-    </ul>
+
+    </ListGroup>
     <Button variant="primary">Primary</Button>{' '}
     </>
  )
