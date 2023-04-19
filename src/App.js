@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
 export default function App(){
     /*
     Login, SignUp, CreateBookmark, ListBookmarksByUser, DeleteBookmark, UpdateBookmark
@@ -145,16 +149,23 @@ export default function App(){
  return (
     <>
     <h2>Login</h2>
-    <form onSubmit={(e) => {
+    <Form onSubmit={(e) => {
         e.preventDefault()
         login()
     }}>
+        
         <input type="text" value={credentials.email} name="email" onChange={handleChangeAuth} placeholder={'Email Here'}></input>
         <input type="password" value={credentials.password} name="password" onChange={handleChangeAuth} placeholder={'Password'}></input>
         <input type="submit" value="Login as an Existing User"/>
-    </form>
+    </Form>
+    
+
+
+
+
+
     <h2>SignUp</h2>
-    <form onSubmit={(e) => {
+    <Form onSubmit={(e) => {
         e.preventDefault()
         signUp()
     }}>
@@ -162,16 +173,16 @@ export default function App(){
         <input type="text" value={credentials.name} name="name" onChange={handleChangeAuth} placeholder={'Name'}></input>
         <input type="password" value={credentials.password} name="password" onChange={handleChangeAuth} placeholder={'password'}></input>
         <input type="submit" value="Sign Up as New User"/>
-    </form>
+    </Form>
     <h2>Create A Bookmark</h2>
-    <form onSubmit={(e) => {
+    <Form onSubmit={(e) => {
         e.preventDefault()
         createBookmark()
     }}>
         <input type="text" value={bookmark.title} name="title" onChange={handleChange} placeholder={'Title'}></input>
         <input type="text" value={bookmark.url} name="url" onChange={handleChange} placeholder={'URL'}></input>
         <input type="submit" value="Create Bookmark"/>
-    </form>
+    </Form>
     <ul>
         { bookmarks.length ? bookmarks.map(item => (
             <li key={item._id}>
@@ -180,6 +191,7 @@ export default function App(){
             </li>
         )): <>No BookMarks Added</>}
     </ul>
+    <Button variant="primary">Primary</Button>{' '}
     </>
  )
 }
