@@ -1,4 +1,5 @@
 # Bookmarks from [my youtube](https://youtube.com/@bigpoppacode)
+This is not going well
 
 # Run commands in this order to get started
 ## npm i
