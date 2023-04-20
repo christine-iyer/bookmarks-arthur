@@ -1,22 +1,22 @@
-import styles from './CreateBlog.module.scss'
+import styles from './CreateBookmark.module.scss'
 
 
 
-export default function CreateBlog ({
-  createBlog,
-  blog,
+export default function CreateBookmark ({
+  createBookmark,
+  bookmark,
   handleChange
 }
 ) {
   return (
-    <div className={styles.CreateBlog}>
-      <h2 className={styles.NewBlog}>Create A Blog</h2>
+    <div className={styles.CreateBookmark}>
+      <h2 className={styles.NewBookmark}>Create A Bookmark</h2>
       <div className={styles.container}>
         <form 
           className={styles.form}
           onSubmit={(e) => {
             e.preventDefault()
-            createBlog()
+            createBookmark()
           }}
         >
           
@@ -24,7 +24,7 @@ export default function CreateBlog ({
             <input 
             className={styles.title}
             type='text' 
-            value={blog.title} 
+            value={bookmark.title} 
             name='title' 
             onChange={handleChange} 
             placeholder='Title' 
@@ -34,7 +34,7 @@ export default function CreateBlog ({
           <label>Url
             <input className={styles.url}
             type='text' 
-            value={blog.url} 
+            value={bookmark.url} 
             name='url' 
             onChange={handleChange} 
             placeholder='URL' />
@@ -43,8 +43,8 @@ export default function CreateBlog ({
           <label>Pick a category:
             <select 
             
-            options={blog.category} 
-            value={blog.category} 
+            options={bookmark.category} 
+            value={bookmark.category} 
             onChange={handleChange} 
             placeholder='Category'
             name="category">
@@ -58,7 +58,7 @@ export default function CreateBlog ({
 
           <input className={styles.button} 
           type='submit' 
-          value='Create Blog' />
+          value='Create Bookmark' />
 
         </form>
       </div>
