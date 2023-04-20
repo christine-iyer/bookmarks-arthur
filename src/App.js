@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ListGroup } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import Auth from './components/Auth/Auth';
 
 
 export default function App() {
@@ -156,7 +156,6 @@ export default function App() {
                     login()
 
                 }}>
-
                 <Form.Group controlId='formBasicEmail'>
                     <Form.Label>Email</Form.Label>
                     <Form.Control
@@ -179,7 +178,7 @@ export default function App() {
                 </Button>
 
             </Form>
-            <h2>SignUp</h2>
+            {/* <h2>SignUp</h2>
             <Form style={{ width: '38rem' }}
                 onSubmit={(e) => {
                     e.preventDefault()
@@ -215,7 +214,8 @@ export default function App() {
                 </Form.Group>
                 <Button variant='success' type='submit'>Submit
                 </Button>
-            </Form>
+            </Form> */}
+            
             <h2>Create A Bookmark</h2>
             <Form
                 style={{ width: '38rem' }}
@@ -253,6 +253,9 @@ export default function App() {
                     </ListGroup.Item >
                 )) : <>No BookMarks Added</>}
             </ListGroup>
+
+
+            <Auth />
         </>
     )
 }
