@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ListGroup } from 'react-bootstrap';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 
 export default function App() {
@@ -152,6 +154,7 @@ export default function App() {
                 onSubmit={(e) => {
                     e.preventDefault()
                     login()
+
                 }}>
 
                 <Form.Group controlId='formBasicEmail'>
@@ -182,10 +185,6 @@ export default function App() {
                     e.preventDefault()
                     signUp()
                 }}>
-                {/* <input type="text" value={credentials.email} name="email" onChange={handleChangeAuth} placeholder={'Email'}></input>
-        <input type="text" value={credentials.name} name="name" onChange={handleChangeAuth} placeholder={'Name'}></input>
-        <input type="password" value={credentials.password} name="password" onChange={handleChangeAuth} placeholder={'password'}></input>
-        <input type="submit" value="Sign Up as New User"/> */}
                 <Form.Group controlId='formBasicEmail'>
                     <Form.Label>Email</Form.Label>
                     <Form.Control
@@ -218,10 +217,12 @@ export default function App() {
                 </Button>
             </Form>
             <h2>Create A Bookmark</h2>
-            <Form onSubmit={(e) => {
-                e.preventDefault()
-                createBookmark()
-            }}>
+            <Form
+                style={{ width: '38rem' }}
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    createBookmark()
+                }}>
                 <Form.Group controlId='formBasicTitle'>
                     <Form.Label>Bookmark Title</Form.Label>
                     <Form.Control
@@ -234,7 +235,8 @@ export default function App() {
                 </Form.Group>
                 <Form.Group controlId='formBasicURL'>
                     <Form.Label>Bookmark Link</Form.Label>
-                    <Form.Control onChange={handleChange}
+                    <Form.Control
+                        onChange={handleChange}
                         value={bookmarks.url}
                         name='url'
                         type='text'
@@ -242,27 +244,15 @@ export default function App() {
                 </Form.Group>
                 <Button variant='success' type='submit'>Submit
                 </Button>
-
-
-
-
-                {/* <input type="text" value={bookmark.title} name="title" onChange={handleChange} placeholder={'Title'}></input>
-                <input type="text" value={bookmark.url} name="url" onChange={handleChange} placeholder={'URL'}></input>
-                <input type="submit" value="Create Bookmark" /> */}
             </Form>
             <ListGroup as="ol" numbered='true'>
-
-
-
                 {bookmarks.length ? bookmarks.map(item => (
                     <ListGroup.Item key={item._id}>
                         <h4>{item.title}</h4>
-                        <a href={item.url} target="_blank"> {item.url}</a>
+                        <a href={item.url} target="_blank"> {item.title}</a>
                     </ListGroup.Item >
                 )) : <>No BookMarks Added</>}
-
             </ListGroup>
-            <Button variant="primary">Primary</Button>{' '}
         </>
     )
 }
