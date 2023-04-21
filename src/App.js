@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ListGroup } from 'react-bootstrap';
-import Col from 'react-bootstrap/Col';
-import Auth from './components/Auth/Auth';
+import Row from 'react-bootstrap/Row';
+
 
 
 export default function App() {
@@ -25,6 +25,9 @@ export default function App() {
         url: ''
     })
     const [bookmarks, setBookmarks] = useState([])
+
+    const [showSignUp, setShowSignUp] = useState(true)
+    const [user, setUser] = useState(null)
 
     const [token, setToken] = useState('')
     const login = async () => {
@@ -148,42 +151,30 @@ export default function App() {
     }, [])
     return (
         <>
-            <h2>Login</h2>
-            <Form
-                style={{ width: '38rem' }}
-                onSubmit={(e) => {
-                    e.preventDefault()
-                    login()
 
-                }}>
-                <Form.Group controlId='formBasicEmail'>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        onChange={handleChangeAuth}
-                        value={credentials.email}
-                        name='email'
-                        type='text'
-                        placeholder='Enter your Email'
-                    />
-                </Form.Group>
-                <Form.Group controlId='formBasicPassword'>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control onChange={handleChangeAuth}
-                        value={credentials.password}
-                        name='password'
-                        type='text'
-                        placeholder='Enter your Password' />
-                </Form.Group>
-                <Button variant='success' type='submit'>Submit
-                </Button>
-
-            </Form>
-            {/* <h2>SignUp</h2>
-            <Form style={{ width: '38rem' }}
+           <div>
+           {
+    user && user.name
+      ? <h1 className='styles.h1'>Welcome {user.name.toUpperCase()}</h1>
+      : <>
+        <Button
+          className=' '
+          onClick={() => {
+            setShowSignUp(!showSignUp)
+          }}
+        >
+          {showSignUp ? 'Sign Up  Below or Click Here To Login' : 'Welcome Back, Login or Click Here To Sign Up'}
+        </Button>
+        {
+            showSignUp
+              ? 
+<Form 
+            style={{ width: '38rem' }}
                 onSubmit={(e) => {
                     e.preventDefault()
                     signUp()
                 }}>
+                    <h2>SignUp</h2>
                 <Form.Group controlId='formBasicEmail'>
                     <Form.Label>Email</Form.Label>
                     <Form.Control
@@ -214,15 +205,54 @@ export default function App() {
                 </Form.Group>
                 <Button variant='success' type='submit'>Submit
                 </Button>
-            </Form> */}
+            </Form>
+
+              : 
+<Form
+                style={{ width: '38rem'}}
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    login()
+
+                }}>
+                    <h2>Login</h2>
+                <Form.Group controlId='formBasicEmail'>
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                        onChange={handleChangeAuth}
+                        value={credentials.email}
+                        name='email'
+                        type='text'
+                        placeholder='Enter your Email'
+                    />
+                </Form.Group>
+                <Form.Group controlId='formBasicPassword'>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control onChange={handleChangeAuth}
+                        value={credentials.password}
+                        name='password'
+                        type='text'
+                        placeholder='Enter your Password' />
+                </Form.Group>
+                <Button variant='success' type='submit'>Submit
+                </Button>
+
+            </Form>
+
+        }
+      </>
+}
+          
+            </div> 
             
-            <h2>Create A Bookmark</h2>
+            
             <Form
                 style={{ width: '38rem' }}
                 onSubmit={(e) => {
                     e.preventDefault()
                     createBookmark()
                 }}>
+                    <h2>Create A Bookmark</h2>
                 <Form.Group controlId='formBasicTitle'>
                     <Form.Label>Bookmark Title</Form.Label>
                     <Form.Control
@@ -246,6 +276,7 @@ export default function App() {
                 </Button>
             </Form>
             <ListGroup as="ol" numbered='true'>
+                <h1>Bookmarks</h1>
                 {bookmarks.length ? bookmarks.map(item => (
                     <ListGroup.Item key={item._id}>
                         <h4>{item.title}</h4>
@@ -255,7 +286,7 @@ export default function App() {
             </ListGroup>
 
 
-            <Auth />
         </>
     )
 }
+
