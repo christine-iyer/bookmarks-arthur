@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ListGroup } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 
@@ -152,109 +153,121 @@ export default function App() {
     return (
         <>
 
-           <div>
-           {
-    user && user.name
-      ? <h1 className='styles.h1'>Welcome {user.name.toUpperCase()}</h1>
-      : <>
-        <Button
-          className=' '
-          onClick={() => {
-            setShowSignUp(!showSignUp)
-          }}
-        >
-          {showSignUp ? 'Sign Up  Below or Click Here To Login' : 'Welcome Back, Login or Click Here To Sign Up'}
-        </Button>
-        {
-            showSignUp
-              ? 
-<Form 
-            style={{ width: '38rem' }}
-                onSubmit={(e) => {
-                    e.preventDefault()
-                    signUp()
-                }}>
-                    <h2>SignUp</h2>
-                <Form.Group controlId='formBasicEmail'>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        onChange={handleChangeAuth}
-                        value={credentials.email}
-                        name='email'
-                        type='text'
-                        placeholder='Enter your Email'
-                    />
-                </Form.Group>
-                <Form.Group controlId='formBasicName'>
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                        onChange={handleChangeAuth}
-                        value={credentials.name}
-                        name='name'
-                        type='text'
-                        placeholder='Enter your Name'
-                    />
-                </Form.Group>
-                <Form.Group controlId='formBasicPassword'>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control onChange={handleChangeAuth}
-                        value={credentials.password}
-                        name='password'
-                        type='text'
-                        placeholder='Enter your Email' />
-                </Form.Group>
-                <Button variant='success' type='submit'>Submit
-                </Button>
-            </Form>
+            <div>
+                {
+                    user && user.name
+                        ? <h1 className='styles.h1'>Welcome {user.name.toUpperCase()}</h1>
+                        : <>
+                            <Button
+                                variant='success'
+                                className=' '
+                                onClick={() => {
+                                    setShowSignUp(!showSignUp)
+                                }}
+                            >
+                                {showSignUp ? 'Sign Up  Below or Click Here To Login' : 'Welcome Back, Login or Click Here To Sign Up'}
+                            </Button>
+                            {
+                                showSignUp
+                                    ?
+                                    <Form
+                                        style={{ width: '78rem' }}
+                                        onSubmit={(e) => {
+                                            e.preventDefault()
+                                            signUp()
+                                        }}>
+                                        <Row>
+                                            <h2>SignUp</h2>
+                                            <Col>
+                                                <Form.Group controlId='formBasicEmail'>
+                                                    <Form.Label>Email</Form.Label>
+                                                    <Form.Control
+                                                        onChange={handleChangeAuth}
+                                                        value={credentials.email}
+                                                        name='email'
+                                                        type='text'
+                                                        placeholder='Enter your Email'
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
 
-              : 
-<Form
-                style={{ width: '38rem'}}
-                onSubmit={(e) => {
-                    e.preventDefault()
-                    login()
+                                                <Form.Group controlId='formBasicName'>
+                                                    <Form.Label>Name</Form.Label>
+                                                    <Form.Control
+                                                        onChange={handleChangeAuth}
+                                                        value={credentials.name}
+                                                        name='name'
+                                                        type='text'
+                                                        placeholder='Enter your Name'
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group controlId='formBasicPassword'>
+                                                    <Form.Label>Password</Form.Label>
+                                                    <Form.Control onChange={handleChangeAuth}
+                                                        value={credentials.password}
+                                                        name='password'
+                                                        type='text'
+                                                        placeholder='Enter your Email' />
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
 
-                }}>
-                    <h2>Login</h2>
-                <Form.Group controlId='formBasicEmail'>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        onChange={handleChangeAuth}
-                        value={credentials.email}
-                        name='email'
-                        type='text'
-                        placeholder='Enter your Email'
-                    />
-                </Form.Group>
-                <Form.Group controlId='formBasicPassword'>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control onChange={handleChangeAuth}
-                        value={credentials.password}
-                        name='password'
-                        type='text'
-                        placeholder='Enter your Password' />
-                </Form.Group>
-                <Button variant='success' type='submit'>Submit
-                </Button>
 
-            </Form>
-
-        }
-      </>
-}
-          
-            </div> 
-            
-            
+                                        <Button variant='success' type='submit'>Submit
+                                        </Button>
+                                    </Form>
+                                    :
+                                    <Form
+                                        style={{ width: '78rem' }}
+                                        onSubmit={(e) => {
+                                            e.preventDefault()
+                                            login()
+                                        }}>
+                                        <h2>Login</h2>
+                                        <Row>
+                                            <Col>
+                                                <Form.Group controlId='formBasicEmail'>
+                                                    <Form.Label>Email</Form.Label>
+                                                    <Form.Control
+                                                        onChange={handleChangeAuth}
+                                                        value={credentials.email}
+                                                        name='email'
+                                                        type='text'
+                                                        placeholder='Enter your Email'
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group controlId='formBasicPassword'>
+                                                    <Form.Label>Password</Form.Label>
+                                                    <Form.Control onChange={handleChangeAuth}
+                                                        value={credentials.password}
+                                                        name='password'
+                                                        type='text'
+                                                        placeholder='Enter your Password' />
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                        <Button variant='success' type='submit'>Submit
+                                        </Button>
+                                    </Form>
+                            }
+                        </>
+                }
+            </div>
             <Form
                 style={{ width: '38rem' }}
                 onSubmit={(e) => {
                     e.preventDefault()
                     createBookmark()
                 }}>
-                    <h2>Create A Bookmark</h2>
+
+                <h2>Create A Bookmark</h2>
+                <Row></Row>
                 <Form.Group controlId='formBasicTitle'>
-                    <Form.Label>Bookmark Title</Form.Label>
                     <Form.Control
                         onChange={handleChange}
                         value={bookmarks.title}
@@ -263,8 +276,25 @@ export default function App() {
                         placeholder='Title'
                     />
                 </Form.Group>
+                <Form.Group>
+                    <Form.Label>Open this select menu and make a choice</Form.Label>
+                    <Form.Select aria-label='ghjgjhgjgjhg'>
+
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option value="4">Four</option>
+                        <option value="5">Five</option>
+                    </Form.Select>
+                    <Form.Control
+                        onChange={handleChange}
+                        value={bookmarks.category}
+                        name='category'
+                    />
+                </Form.Group>
+
+
                 <Form.Group controlId='formBasicURL'>
-                    <Form.Label>Bookmark Link</Form.Label>
                     <Form.Control
                         onChange={handleChange}
                         value={bookmarks.url}
@@ -272,8 +302,11 @@ export default function App() {
                         type='text'
                         placeholder='Enter your Link' />
                 </Form.Group>
+
+
                 <Button variant='success' type='submit'>Submit
                 </Button>
+
             </Form>
             <ListGroup as="ol" numbered='true'>
                 <h1>Bookmarks</h1>
