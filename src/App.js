@@ -259,14 +259,15 @@ export default function App() {
                 }
             </div>
             <Form
-                style={{ width: '38rem' }}
+                style={{ width: '78rem' }}
                 onSubmit={(e) => {
                     e.preventDefault()
                     createBookmark()
                 }}>
 
                 <h2>Create A Bookmark</h2>
-                <Row></Row>
+                <Row>
+                    <Col>
                 <Form.Group controlId='formBasicTitle'>
                     <Form.Control
                         onChange={handleChange}
@@ -276,11 +277,13 @@ export default function App() {
                         placeholder='Title'
                     />
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>Open this select menu and make a choice</Form.Label>
+                </Col>
+                <Col>
+                <Form.Group controlId='formBasicOption'>
+                  
                     <Form.Select aria-label='ghjgjhgjgjhg'>
 
-                        <option value="1">One</option>
+                        <option value="1">Open this select menu and make a choice</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                         <option value="4">Four</option>
@@ -288,12 +291,15 @@ export default function App() {
                     </Form.Select>
                     <Form.Control
                         onChange={handleChange}
+                        type='text'
                         value={bookmarks.category}
                         name='category'
                     />
                 </Form.Group>
 
 
+                </Col>
+                <Col>
                 <Form.Group controlId='formBasicURL'>
                     <Form.Control
                         onChange={handleChange}
@@ -302,7 +308,8 @@ export default function App() {
                         type='text'
                         placeholder='Enter your Link' />
                 </Form.Group>
-
+                </Col>
+                </Row>
 
                 <Button variant='success' type='submit'>Submit
                 </Button>
