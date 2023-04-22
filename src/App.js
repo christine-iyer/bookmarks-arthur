@@ -23,7 +23,9 @@ export default function App() {
     })
     const [bookmark, setBookmark] = useState({
         title: '',
-        url: ''
+        category: '',
+        url: '',
+        body: ''
     })
     const [bookmarks, setBookmarks] = useState([])
 
@@ -80,7 +82,9 @@ export default function App() {
         } finally {
             setBookmark({
                 title: '',
-                url: ''
+                url: '',
+                category: '',
+                body: ''
             })
         }
     }
@@ -268,47 +272,58 @@ export default function App() {
                 <h2>Create A Bookmark</h2>
                 <Row>
                     <Col>
-                <Form.Group controlId='formBasicTitle'>
-                    <Form.Control
+                        <Form.Group controlId='formBasicTitle'>
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control
+                                onChange={handleChange}
+                                value={bookmarks.title}
+                                name='title'
+                                type='text'
+                                placeholder='Title'
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group controlId="formBasicSelect">
+                            <Form.Label>Select Category</Form.Label>
+                            <Form.Control
+                                as='select'
+                                type='text'
+                                name='category'
+                                option={bookmarks.category}
+                                value={bookmarks.category}
+                                onChange={handleChange}>
+                                <option value="Work">Work</option>
+                                <option value="Family">Family</option>
+                                <option value="Code">Code</option>
+                                <option value="Friends">Friends</option>
+                                <option value="Misc">Misc</option>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group controlId='formBasicURL'>
+                            <Form.Label>Link</Form.Label>
+                            <Form.Control
+                                onChange={handleChange}
+                                value={bookmarks.url}
+                                name='url'
+                                type='text'
+                                placeholder='Enter your Link' />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Spill your guts</Form.Label>
+                        <Form.Control 
+                        as="textarea" 
+                        rows={3}
                         onChange={handleChange}
-                        value={bookmarks.title}
-                        name='title'
-                        type='text'
-                        placeholder='Title'
-                    />
-                </Form.Group>
-                </Col>
-                <Col>
-                <Form.Group controlId='formBasicOption'>
-                  
-                    <Form.Select aria-label='ghjgjhgjgjhg'>
-
-                        <option value="1">Open this select menu and make a choice</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                        <option value="4">Four</option>
-                        <option value="5">Five</option>
-                    </Form.Select>
-                    <Form.Control
-                        onChange={handleChange}
-                        type='text'
-                        value={bookmarks.category}
-                        name='category'
-                    />
-                </Form.Group>
-
-
-                </Col>
-                <Col>
-                <Form.Group controlId='formBasicURL'>
-                    <Form.Control
-                        onChange={handleChange}
-                        value={bookmarks.url}
-                        name='url'
-                        type='text'
-                        placeholder='Enter your Link' />
-                </Form.Group>
-                </Col>
+                                value={bookmarks.body}
+                                name='body'
+                                placeholder='' />
+                    </Form.Group>
                 </Row>
 
                 <Button variant='success' type='submit'>Submit
@@ -319,8 +334,9 @@ export default function App() {
                 <h1>Bookmarks</h1>
                 {bookmarks.length ? bookmarks.map(item => (
                     <ListGroup.Item key={item._id}>
-                        <h4>{item.title}</h4>
+                        <h4>{item.title} category: {item.category}</h4>
                         <a href={item.url} target="_blank"> {item.title}</a>
+                        <p>{item.body}</p>
                     </ListGroup.Item >
                 )) : <>No BookMarks Added</>}
             </ListGroup>
