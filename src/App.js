@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import { ListGroup } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import ImageUpload from './components/ImageUpload/ImageUpload';
 
 
 export default function App() {
@@ -24,7 +24,7 @@ export default function App() {
     const [bookmark, setBookmark] = useState({
         title: '',
         category: '',
-        url: '',
+        image: '',
         body: ''
     })
     const [bookmarks, setBookmarks] = useState([])
@@ -82,7 +82,7 @@ export default function App() {
         } finally {
             setBookmark({
                 title: '',
-                url: '',
+                image: '',
                 category: '',
                 body: ''
             })
@@ -306,8 +306,8 @@ export default function App() {
                             <Form.Label>Link</Form.Label>
                             <Form.Control
                                 onChange={handleChange}
-                                value={bookmarks.url}
-                                name='url'
+                                value={bookmarks.image}
+                                name='image'
                                 type='text'
                                 placeholder='Enter your Link' />
                         </Form.Group>
@@ -335,11 +335,12 @@ export default function App() {
                 {bookmarks.length ? bookmarks.map(item => (
                     <ListGroup.Item key={item._id}>
                         <h4>{item.title} category: {item.category}</h4>
-                        <a href={item.url} target="_blank"> {item.title}</a>
+                        <a href={item.image} target="_blank"> {item.title}</a>
                         <p>{item.body}</p>
                     </ListGroup.Item >
                 )) : <>No BookMarks Added</>}
             </ListGroup>
+            <ImageUpload />
 
 
         </>
