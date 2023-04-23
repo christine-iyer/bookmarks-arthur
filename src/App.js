@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react'
-
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
+
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ListGroup } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import ImageUpload from './components/ImageUpload/ImageUpload';
+import { Cloudinary } from "@cloudinary/url-gen";
+
+
+
 
 
 export default function App() {
@@ -21,6 +25,18 @@ export default function App() {
         password: '',
         name: ''
     })
+
+
+    const cld = new Cloudinary({
+        cloud: {
+            cloud_name: "dqjhgnivi", //Your cloud name
+            upload_preset: "crystal" //Create an unsigned upload preset and update this
+        }
+    });
+
+   
+
+
     const [bookmark, setBookmark] = useState({
         title: '',
         category: '',
@@ -262,6 +278,11 @@ export default function App() {
                         </>
                 }
             </div>
+
+            <h3>Cloudinary Upload Widget Example</h3>
+      <CloudinaryUploadWidget />
+      
+
             <Form
                 style={{ width: '78rem' }}
                 onSubmit={(e) => {
@@ -270,6 +291,7 @@ export default function App() {
                 }}>
 
                 <h2>Create A Bookmark</h2>
+ 
                 <Row>
                     <Col>
                         <Form.Group controlId='formBasicTitle'>
@@ -316,13 +338,13 @@ export default function App() {
                 <Row>
                     <Form.Group className="mb-3">
                         <Form.Label>Spill your guts</Form.Label>
-                        <Form.Control 
-                        as="textarea" 
-                        rows={3}
-                        onChange={handleChange}
-                                value={bookmarks.body}
-                                name='body'
-                                placeholder='' />
+                        <Form.Control
+                            as="textarea"
+                            rows={3}
+                            onChange={handleChange}
+                            value={bookmarks.body}
+                            name='body'
+                            placeholder='' />
                     </Form.Group>
                 </Row>
 
@@ -335,12 +357,15 @@ export default function App() {
                 {bookmarks.length ? bookmarks.map(item => (
                     <ListGroup.Item key={item._id}>
                         <h4>{item.title} category: {item.category}</h4>
-                        <a href={item.image} target="_blank"> {item.title}</a>
+                        <img
+                            id="uploadedimage"
+                            src="">
+                        </img> <a href={item.image} target="_blank"> {item.title}</a>
                         <p>{item.body}</p>
                     </ListGroup.Item >
                 )) : <>No BookMarks Added</>}
             </ListGroup>
-            <ImageUpload />
+
 
 
         </>

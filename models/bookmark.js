@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose')
 const bookmarkSchema = new Schema({
     title: { type: String, required: true },
     category: {type: String},
-    images: [{ type: mongoose.Schema.Types.ObjectId, ref: 'imageUpload' }],
+    image: { type: String },
     body: { type: String }
 }, {
     timestamps: true
