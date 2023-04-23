@@ -4,10 +4,11 @@ import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { ListGroup } from 'react-bootstrap';
+import { ListGroup, Card } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Cloudinary } from "@cloudinary/url-gen";
+
 
 
 
@@ -20,6 +21,9 @@ export default function App() {
     const handleChange = (event) => {
         setBookmark({ ...bookmark, [event.target.name]: event.target.value })
     }
+    const [imageUrl, setImageUrl] = useState({
+        secure_url: ''
+    })
     const [credentials, setCredentials] = useState({
         email: '',
         password: '',
@@ -357,10 +361,10 @@ export default function App() {
                 {bookmarks.length ? bookmarks.map(item => (
                     <ListGroup.Item key={item._id}>
                         <h4>{item.title} category: {item.category}</h4>
-                        <img
+                        <Card.Img
                             id="uploadedimage"
-                            src="">
-                        </img> <a href={item.image} target="_blank"> {item.title}</a>
+                            src={item.url}>
+                        </Card.Img> <a href={item.image} target="_blank"> {item.title}</a>
                         <p>{item.body}</p>
                     </ListGroup.Item >
                 )) : <>No BookMarks Added</>}
