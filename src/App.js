@@ -8,6 +8,7 @@ import { ListGroup, Card } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Cloudinary } from "@cloudinary/url-gen";
+import { image } from '@cloudinary/url-gen/qualifiers/source';
 
 
 
@@ -24,6 +25,7 @@ export default function App() {
     const [imageUrl, setImageUrl] = useState({
         secure_url: ''
     })
+
     const [credentials, setCredentials] = useState({
         email: '',
         password: '',
@@ -174,10 +176,11 @@ export default function App() {
             setToken(JSON.parse(tokenData))
         }
     }, [])
+
+    
     return (
         <>
-
-            <div>
+        <div>
                 {
                     user && user.name
                         ? <h1 className='styles.h1'>Welcome {user.name.toUpperCase()}</h1>
@@ -284,7 +287,7 @@ export default function App() {
             </div>
 
             <h3>Cloudinary Upload Widget Example</h3>
-            <CloudinaryUploadWidget />
+            <CloudinaryUploadWidget setImageUrl={imageUrl}/>
 
 
             <Form
@@ -356,6 +359,7 @@ export default function App() {
                 </Button>
 
             </Form>
+       
 
             <h1>Bookmarks</h1>
             {bookmarks.length ? bookmarks.map(item => (
@@ -373,11 +377,7 @@ export default function App() {
                     <Card.Text>category: {item.category} item: {item.body}</Card.Text>
                 </Card >
             )) : <>No BookMarks Added</>}
-
-
-
-
-        </>
+</>
     )
 }
 
