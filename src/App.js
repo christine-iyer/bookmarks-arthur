@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
-
+import styles from './App.module.scss'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ListGroup, Card } from 'react-bootstrap';
@@ -38,7 +38,7 @@ export default function App() {
         }
     });
 
-   
+
 
 
     const [bookmark, setBookmark] = useState({
@@ -284,8 +284,8 @@ export default function App() {
             </div>
 
             <h3>Cloudinary Upload Widget Example</h3>
-      <CloudinaryUploadWidget />
-      
+            <CloudinaryUploadWidget />
+
 
             <Form
                 style={{ width: '78rem' }}
@@ -295,7 +295,7 @@ export default function App() {
                 }}>
 
                 <h2>Create A Bookmark</h2>
- 
+
                 <Row>
                     <Col>
                         <Form.Group controlId='formBasicTitle'>
@@ -356,19 +356,24 @@ export default function App() {
                 </Button>
 
             </Form>
-            <ListGroup as="ol" numbered='true'>
-                <h1>Bookmarks</h1>
-                {bookmarks.length ? bookmarks.map(item => (
-                    <ListGroup.Item key={item._id}>
-                        <h4>{item.title} category: {item.category}</h4>
-                        <Card.Img
-                            id="uploadedimage"
-                            src={item.url}>
-                        </Card.Img> <a href={item.image} target="_blank"> {item.title}</a>
-                        <p>{item.body}</p>
-                    </ListGroup.Item >
-                )) : <>No BookMarks Added</>}
-            </ListGroup>
+
+            <h1>Bookmarks</h1>
+            {bookmarks.length ? bookmarks.map(item => (
+                <Card className={styles.card}key={item._id}
+                    style={{ width: '18rem' }}
+                >
+
+                    <Card.Title>{item.title}</Card.Title>
+                    <Card.Img
+                    variant='top'
+                    id="uploadedimage"
+                    src={item.image}>
+                    </Card.Img> 
+                    <a href={item.image} target="_blank"> {item.title}</a>
+                    <Card.Text>category: {item.category} item: {item.body}</Card.Text>
+                </Card >
+            )) : <>No BookMarks Added</>}
+
 
 
 
