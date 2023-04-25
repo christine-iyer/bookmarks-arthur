@@ -53,6 +53,7 @@ export default function App() {
 
     const [showSignUp, setShowSignUp] = useState(true)
     const [user, setUser] = useState(null)
+    const [imageUrl, setImageUrl] = useEffect
 
     const [token, setToken] = useState('')
     const login = async () => {
@@ -375,6 +376,7 @@ export default function App() {
                     </Card.Img> 
                     <a href={item.image} target="_blank"> {item.title}</a>
                     <Card.Text>category: {item.category} item: {item.body}</Card.Text>
+                    
                 </Card >
             )) : <>No BookMarks Added</>}
 </>
