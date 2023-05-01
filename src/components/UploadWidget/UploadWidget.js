@@ -40,7 +40,9 @@ const UploadWidget = ({ children, onUpload }) => {
 
     const options = {
       cloudName: 'dqjhgnivi', // Ex: mycloudname
-      uploadPreset: 'crystal' // Ex: myuploadpreset
+      uploadPreset: 'crystal' ,// Ex: myuploadpreset
+      cropping: true,
+      maxImageWidth: 200
     }
 
     return cloudinary?.createUploadWidget(options,
