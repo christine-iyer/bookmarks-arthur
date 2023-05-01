@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Card } from 'react-bootstrap';
 
+
 import UploadWidget from './UploadWidget';
 
 
@@ -32,7 +33,7 @@ export default function DisplayURL() {
         </h1>
       </div>
 
-      <div className="container">
+      <Card className="container">
         <h2>Unsigned with Upload Preset</h2>
         <UploadWidget onUpload={handleOnUpload}>
           {({ open }) => {
@@ -51,12 +52,13 @@ export default function DisplayURL() {
         {error && <p>{ error }</p>}
 
         {url && (
+
           <>
             <p><img src={ url } alt="Uploaded resource" /></p>
-            <p>{ url }</p>
+            <Card.Text>{ url }</Card.Text>
           </>
         )}
-      </div>
+      </Card>
 
     </main>
   );
