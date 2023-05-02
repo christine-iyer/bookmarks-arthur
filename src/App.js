@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
+// import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
 import styles from './App.module.scss'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { ListGroup, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Cloudinary } from "@cloudinary/url-gen";
@@ -90,15 +90,15 @@ export default function App() {
         }
     }
     function handleOnUpload(error, result, widget) {
-     if (error) {
-         updateError(error);
-         widget.close({
-             quiet: true
-         });
-         return;
-     }
-     updateUrl(result?.info?.secure_url);
- }
+        if (error) {
+            updateError(error);
+            widget.close({
+                quiet: true
+            });
+            return;
+        }
+        updateUrl(result?.info?.secure_url);
+    }
     const createBookmark = async () => {
         try {
             const response = await fetch('/api/bookmarks', {
@@ -193,14 +193,14 @@ export default function App() {
 
     return (
         <>
-        <div>
+            <div>
                 {
                     user && user.name
                         ? <h1 className='styles.h1'>Welcome {user.name.toUpperCase()}</h1>
                         : <>
                             <Button
-                                variant='success'
-                                className=' '
+                                variant='default'
+                                className='btn'
                                 onClick={() => {
                                     setShowSignUp(!showSignUp)
                                 }}
@@ -256,7 +256,9 @@ export default function App() {
                                         </Row>
 
 
-                                        <Button variant='success' type='submit'>Submit
+                                        <Button 
+                                        variant='default' 
+                                        type='submit'>Submit
                                         </Button>
                                     </Form>
                                     :
@@ -291,7 +293,7 @@ export default function App() {
                                                 </Form.Group>
                                             </Col>
                                         </Row>
-                                        <Button variant='success' type='submit'>Submit
+                                        <Button variant='default' type='submit'>Submit
                                         </Button>
                                     </Form>
                             }
@@ -299,8 +301,8 @@ export default function App() {
                 }
             </div>
 
-            <h3>Cloudinary Upload Widget Example</h3>
-            <CloudinaryUploadWidget setImageUrl={imageUrl}/>
+            {/* <h3>Cloudinary Upload Widget Example</h3>
+            <CloudinaryUploadWidget setImageUrl={imageUrl} /> */}
 
             <div className="container">
                 <h1 className="title">
@@ -315,27 +317,23 @@ export default function App() {
                         function handleOnClick(e) {
                             e.preventDefault();
                             open();
+                            (updateUrl(url))
                         }
                         return (
-                            <button onClick={handleOnClick}>
+                            <button className={styles.blue} onClick={handleOnClick}>
                                 Upload an Image
                             </button>
                         )
                     }}
                 </UploadWidget>
-
                 {error && <p>{error}</p>}
-
                 {url && (
-                    <Card key={url._id} className={styles.card} style={{ width: '18rem' }}
-                    >
-                        <Card.Img variant="top" src={url}id="uploadedimage" ></Card.Img>
+                    <Card key={url._id} className={styles.card} style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src={url} id="uploadedimage"></Card.Img>
                         <Card.Body className={styles.url}>{url}</Card.Body>
                     </Card>
                 )}
             </div>
-
-
             <Form
                 style={{ width: '78rem' }}
                 onSubmit={(e) => {
@@ -344,7 +342,6 @@ export default function App() {
                 }}>
 
                 <h2>Create A Bookmark</h2>
-
                 <Row>
                     <Col>
                         <Form.Group controlId='formBasicTitle'>
@@ -379,12 +376,14 @@ export default function App() {
                     <Col>
                         <Form.Group controlId='formBasicURL'>
                             <Form.Label>Link</Form.Label>
+                            {error && <p>{error}</p>}
+                {url && (
                             <Form.Control
                                 onChange={handleChange}
-                                value={bookmarks.image}
+                                value={url}
                                 name='image'
-                                type='text'
-                                placeholder='Enter your Link' />
+                                type='img'
+                                placeholder='Enter your Link' />)}
                         </Form.Group>
                     </Col>
                 </Row>
@@ -400,30 +399,24 @@ export default function App() {
                             placeholder='' />
                     </Form.Group>
                 </Row>
-
-                <Button variant='success' type='submit'>Submit
-                </Button>
-
+                <Button variant='success' type='submit'>Submit</Button>
             </Form>
-
-
             <h1>Bookmarks</h1>
             {bookmarks.length ? bookmarks.map(item => (
-                <Card className={styles.card}key={item._id}
-                    style={{ width: '18rem' }}
-                >
-
+                <Card className={styles.card} key={item._id}
+                    style={{ width: '18rem' }}>
                     <Card.Title>{item.title}</Card.Title>
                     <Card.Img
-                    variant='top'
-                    id="uploadedimage"
-                    src={item.image}>
-                    </Card.Img> 
+                        variant='top'
+                        id="uploadedimage"
+                        src={item.image}>
+                    </Card.Img>
                     <a href={item.image} target="_blank"> {item.title}</a>
                     <Card.Text>category: {item.category} item: {item.body}</Card.Text>
-
+                    {/* <Button variant="warning" onClick={deletedBookmark}>Delete</Button>
+                    <Button variant="warning" onClick={updateBookmark}>Edit</Button> */}
                 </Card >
             )) : <>No BookMarks Added</>}
-</>
+        </>
     )
 }
