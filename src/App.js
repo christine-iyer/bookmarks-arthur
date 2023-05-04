@@ -11,10 +11,6 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import { image } from '@cloudinary/url-gen/qualifiers/source';
 import UploadWidget from './components/UploadWidget/UploadWidget';
 
-
-
-
-
 export default function App() {
     const handleChangeAuth = (event) => {
         setCredentials({ ...credentials, [event.target.name]: event.target.value })
@@ -32,14 +28,12 @@ export default function App() {
         name: ''
     })
 
-
     const cld = new Cloudinary({
         cloud: {
             cloud_name: "dqjhgnivi", //Your cloud name
             upload_preset: "crystal" //Create an unsigned upload preset and update this
         }
     });
-
 
     const [url, updateUrl] = useState();
     const [error, updateError] = useState();
@@ -98,7 +92,27 @@ export default function App() {
             return;
         }
         updateUrl(result?.info?.secure_url);
+       
     }
+
+    // const login = async () => {
+    //     try {
+    //         const response = await fetch('/api/users/login', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify({ email: credentials.email, password: credentials.password })
+    //         })
+    //         const tokenResponse = await response.json()
+    //         setToken(tokenResponse)
+    //         localStorage.setItem('token', JSON.stringify(tokenResponse))
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    }
+
+
     const createBookmark = async () => {
         try {
             const response = await fetch('/api/bookmarks', {
@@ -116,8 +130,8 @@ export default function App() {
         } finally {
             setBookmark({
                 title: '',
-                image: '',
                 category: '',
+                image: '',
                 body: ''
             })
         }
@@ -256,9 +270,9 @@ export default function App() {
                                         </Row>
 
 
-                                        <Button 
-                                        variant='default' 
-                                        type='submit'>Submit
+                                        <Button
+                                            variant='default'
+                                            type='submit'>Submit
                                         </Button>
                                     </Form>
                                     :
@@ -317,7 +331,7 @@ export default function App() {
                         function handleOnClick(e) {
                             e.preventDefault();
                             open();
-                            (updateUrl(url))
+                            updateUrl(url)
                         }
                         return (
                             <button className={styles.blue} onClick={handleOnClick}>
@@ -377,13 +391,13 @@ export default function App() {
                         <Form.Group controlId='formBasicURL'>
                             <Form.Label>Link</Form.Label>
                             {error && <p>{error}</p>}
-                {url && (
-                            <Form.Control
-                                onChange={handleChange}
-                                value={url}
-                                name='image'
-                                type='img'
-                                placeholder='Enter your Link' />)}
+                            {url && (
+                                <Form.Control
+                                    onChange={handleChange}
+                                    value={url || ''}
+                                    name='image'
+                                    type='img'
+                                    placeholder='Enter your Link' />)}
                         </Form.Group>
                     </Col>
                 </Row>
