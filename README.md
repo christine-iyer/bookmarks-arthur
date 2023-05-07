@@ -142,7 +142,8 @@ export default function App() {
         </main>
     );
 }
-
-
-
 ```
+
+[This code sandbox example](https://codesandbox.io/s/jolly-fog-767kdp) incorporates a file upload into a form.It's written in tsx, but it might be adaptable. It'll be helpful, at least.
+
+[And this](https://forum.freecodecamp.org/t/mern-crud-with-cloudinary/269248) shows an event handler.

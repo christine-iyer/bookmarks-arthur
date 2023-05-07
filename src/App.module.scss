@@ -1,45 +1,65 @@
 .card {
-     padding: 5fr;
-     border: 5px; 
-     
-     border-color: rgb(201, 91, 109) 75%;
-     border-width: 55fr;
-     height: 300px;
-     margin-top: 180px;
-     width: 38px;
-     float: left;
-     background-color: antiquewhite;
-     margin-left: 32px;
-     border-radius: 10px; 
+  padding: 5fr;
+  border: 5px; 
+  
+  border-color: rgb(201, 91, 109) 75%;
+  border-width: 55fr;
+  height: 300px;
+  margin-top: 180px;
+  width: 38px;
+  float: left;
+  background-color: antiquewhite;
+  margin-left: 32px;
+  border-radius: 10px; 
 }
 #uploadedImage{
-     
-     width: 9%;
-     height: fit-content;
-     position: relative;
+  
+  width: 9%;
+  height: fit-content;
+  position: relative;
 }
 .url{
-     font-size: 17px;
-     justify-content: center;
-     color: red;
+  font-size: 7px;
+  justify-content: center;
+  color: red;
 }
 
 .card {
-  position: relative;
-  overflow: hidden;
-  padding: 15px 0;
-  box-sizing: border-box;
-  border-color: navy;
-  
+position: relative;
+overflow: hidden;
+padding: 15px 0;
+box-sizing: border-box;
+&::before {
+ content: "";
+ display: block;
+ background: linear-gradient(
+   90deg,
+   antiquewhite 30%,
+   transparent 30%,
+   transparent 75%,
+   rgb(201, 91, 109) 75%
+ ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+ background-size: 4px;
+ position: absolute;
+ top: -100px;
+ left: -50px;
+ right: -50px;
+ bottom: -1000px;
+
+ transform: rotate(45deg);
+}
+.content {
+ background: rgb(170, 142, 170);
+ height: 300px;
+}
 }
 .h1, h1{
-  color: white;
+color: white;
 }
 h3{
-  color: white;
+color: white;
 }
 .blue{
-  color: green
+color: green
 }
-
 

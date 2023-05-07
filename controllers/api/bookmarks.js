@@ -44,6 +44,8 @@ const respondWithBookmark = (req, res) => {
     res.json(res.locals.data.bookmark)
 }
 
+
+
 module.exports = {
     destroyBookmark,
     updateBookmark,
