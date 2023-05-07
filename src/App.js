@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
 import styles from './App.module.scss'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -8,7 +7,6 @@ import { ListGroup, Card } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Cloudinary } from "@cloudinary/url-gen";
-import { image } from '@cloudinary/url-gen/qualifiers/source';
 import UploadWidget from './components/UploadWidget/UploadWidget';
 
 
@@ -22,26 +20,14 @@ export default function App() {
     const handleChange = (event) => {
         setBookmark({ ...bookmark, [event.target.name]: event.target.value })
     }
-    const [imageUrl, setImageUrl] = useState({
-        secure_url: ''
-    })
 
-    const [credentials, setCredentials] = useState({
+const [credentials, setCredentials] = useState({
         email: '',
         password: '',
         name: ''
     })
 
-
-    const cld = new Cloudinary({
-        cloud: {
-            cloud_name: "dqjhgnivi", //Your cloud name
-            upload_preset: "crystal" //Create an unsigned upload preset and update this
-        }
-    });
-
-
-    const [url, updateUrl] = useState();
+const [url, updateUrl] = useState("https://lolo.com");
     const [error, updateError] = useState();
 
     const [bookmark, setBookmark] = useState({
@@ -97,7 +83,17 @@ export default function App() {
          });
          return;
      }
+     console.dir(result);
      updateUrl(result?.info?.secure_url);
+     setBookmark({
+        title: '',
+        category: '',
+        image: result?.info?.secure_url,
+        body: ''
+    })
+
+
+     console.dir(url);
  }
     const createBookmark = async () => {
         try {
@@ -116,8 +112,8 @@ export default function App() {
         } finally {
             setBookmark({
                 title: '',
-                image: '',
                 category: '',
+                image: '',
                 body: ''
             })
         }
@@ -298,14 +294,14 @@ export default function App() {
                         </>
                 }
             </div>
+{/* 
+            // <h3>Cloudinary Upload Widget Example</h3>
+            // <CloudinaryUploadWidget setImageUrl={imageUrl}/> */}
 
-            <h3>Cloudinary Upload Widget Example</h3>
-            <CloudinaryUploadWidget setImageUrl={imageUrl}/>
-
-            <div className="container">
-                <h1 className="title">
-                    React &amp; Cloudinary Upload Widget
-                </h1>
+            // <div className="container">
+            //     <h1 className="title">
+            //         React &amp; Cloudinary Upload Widget
+            //     </h1>
             </div>
 
             <div className="container">
@@ -340,6 +336,8 @@ export default function App() {
                 style={{ width: '78rem' }}
                 onSubmit={(e) => {
                     e.preventDefault()
+                    console.log("We're submitting . . .")
+                    console.dir(bookmark);
                     createBookmark()
                 }}>
 
@@ -381,7 +379,7 @@ export default function App() {
                             <Form.Label>Link</Form.Label>
                             <Form.Control
                                 onChange={handleChange}
-                                value={bookmarks.image}
+                                value={url}
                                 name='image'
                                 type='text'
                                 placeholder='Enter your Link' />
